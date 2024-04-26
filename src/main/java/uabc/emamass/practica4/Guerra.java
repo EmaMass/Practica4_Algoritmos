@@ -16,6 +16,8 @@ public class Guerra extends javax.swing.JFrame {
     Jugador j1;
     Jugador j2;
     int checkGuerra;
+    int ronda;
+    int MAX;
     Jugador centroJ1;
     Jugador centroJ2;
     /**
@@ -26,6 +28,8 @@ public class Guerra extends javax.swing.JFrame {
         j1 = new Jugador();
         j2 = new Jugador();
         checkGuerra = 0;
+        ronda = 0;
+        MAX = 20; 
         centroJ1 = new Jugador();
         centroJ2 = new Jugador();
     }
@@ -86,6 +90,11 @@ public class Guerra extends javax.swing.JFrame {
         });
 
         LanzarJ1.setText("Lanzar Tarjeta");
+        LanzarJ1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LanzarJ1ActionPerformed(evt);
+            }
+        });
 
         LanzarJ2.setText("Lanzar Tarjeta");
         LanzarJ2.addActionListener(new java.awt.event.ActionListener() {
@@ -188,9 +197,8 @@ public class Guerra extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(ContadorRonda)))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(CartaSecJ2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(CartaPrincipalJ2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CartaSecJ2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CartaPrincipalJ2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LanzarJ2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(TextoCentro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -202,8 +210,8 @@ public class Guerra extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(CartaCentroJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(CartaCentroJ1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(CartaCentroJ2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -252,6 +260,8 @@ public class Guerra extends javax.swing.JFrame {
         // Inicio de Juego/Algoritmo para generar la baraja y repartirlo a los jugadores
         int i = 2;
         String color = "";
+        j1 = new Jugador();
+        j2 = new Jugador();
         ArrayList<Carta> baraja = new ArrayList<>();
         for(int x = 1; x <= 4; x++){
             switch(x){
@@ -274,10 +284,32 @@ public class Guerra extends javax.swing.JFrame {
         LanzarJ2.setEnabled(true);
         CartaPrincipalJ1.setVisible(true);
         CartaPrincipalJ2.setVisible(true);
+        ronda = 0;
+        //Carta Principal J1 y J2 metodo para poner foto de baraja. 
     }//GEN-LAST:event_InicioActionPerformed
 
     private void LanzarJ2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LanzarJ2ActionPerformed
         // TODO add your handling code here:
+        if(j1.isEmpty() != false && j2.isEmpty() != false){
+                MensajeFin.setEnabled(true);
+                LanzarJ1.setEnabled(false);
+                LanzarJ2.setEnabled(false);
+                Inicio.setEnabled(true);
+                if(j1.isEmpty() == true){
+                    MensajeFin.setText("El ganador es el jugador 2!");
+                } else{
+                    MensajeFin.setText("El ganador es el jugador 1!");
+                }
+            } else if(ronda > MAX){
+                MensajeFin.setEnabled(true);
+                LanzarJ1.setEnabled(false);
+                LanzarJ2.setEnabled(false);
+                Inicio.setEnabled(true);
+                MensajeFin.setText("Empate, maxima cantidad de rondas");
+            } else{
+                ronda++;
+                
+            }
     }//GEN-LAST:event_LanzarJ2ActionPerformed
 
     private void CartaSecJ1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CartaSecJ1ActionPerformed
@@ -299,6 +331,30 @@ public class Guerra extends javax.swing.JFrame {
     private void CartaCentroJ2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CartaCentroJ2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_CartaCentroJ2ActionPerformed
+
+    private void LanzarJ1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LanzarJ1ActionPerformed
+        // TODO add your handling code here:
+            if(j1.isEmpty() != false && j2.isEmpty() != false){
+                MensajeFin.setEnabled(true);
+                LanzarJ1.setEnabled(false);
+                LanzarJ2.setEnabled(false);
+                Inicio.setEnabled(true);
+                if(j1.isEmpty() == true){
+                    MensajeFin.setText("El ganador es el jugador 2!");
+                } else{
+                    MensajeFin.setText("El ganador es el jugador 1!");
+                }
+            } else if(ronda > MAX){
+                MensajeFin.setEnabled(true);
+                LanzarJ1.setEnabled(false);
+                LanzarJ2.setEnabled(false);
+                Inicio.setEnabled(true);
+                MensajeFin.setText("Empate, maxima cantidad de rondas");
+            } else{
+                ronda++;
+                //Mandar Carta del J1 al CartaCentroJ1, desplegar carta, revisar si tiene carta igual el oponente para GUERRA!
+            }
+    }//GEN-LAST:event_LanzarJ1ActionPerformed
 
     /**
      * @param args the command line arguments

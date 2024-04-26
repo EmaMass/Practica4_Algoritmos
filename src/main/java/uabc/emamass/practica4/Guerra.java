@@ -4,17 +4,30 @@
  */
 package uabc.emamass.practica4;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 /**
  *
  * @author Emanuel Seiji Massuda Cuevas (poppe)
  */
 public class Guerra extends javax.swing.JFrame {
-
+    
+    Jugador j1;
+    Jugador j2;
+    int checkGuerra;
+    Jugador centroJ1;
+    Jugador centroJ2;
     /**
      * Creates new form Guerra
      */
     public Guerra() {
         initComponents();
+        j1 = new Jugador();
+        j2 = new Jugador();
+        checkGuerra = 0;
+        centroJ1 = new Jugador();
+        centroJ2 = new Jugador();
     }
 
     /**
@@ -28,12 +41,6 @@ public class Guerra extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        CartaPrincipalJ2 = new javax.swing.JPanel();
-        CartaPrincipalCentro = new javax.swing.JPanel();
-        CartaPrincipalJ1 = new javax.swing.JPanel();
-        CartaSecJ2 = new javax.swing.JPanel();
-        CartaSecCentro = new javax.swing.JPanel();
-        CartaSecJ1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -43,78 +50,19 @@ public class Guerra extends javax.swing.JFrame {
         Inicio = new javax.swing.JButton();
         LanzarJ1 = new javax.swing.JButton();
         LanzarJ2 = new javax.swing.JButton();
+        MensajeFin = new javax.swing.JLabel();
+        CartaSecJ1 = new javax.swing.JButton();
+        CartaPrincipalJ1 = new javax.swing.JButton();
+        CartaSecJ2 = new javax.swing.JButton();
+        CartaPrincipalJ2 = new javax.swing.JButton();
+        CartaCentroJ1 = new javax.swing.JButton();
+        CartaCentroJ2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(102, 204, 0));
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 0));
-
-        javax.swing.GroupLayout CartaPrincipalJ2Layout = new javax.swing.GroupLayout(CartaPrincipalJ2);
-        CartaPrincipalJ2.setLayout(CartaPrincipalJ2Layout);
-        CartaPrincipalJ2Layout.setHorizontalGroup(
-            CartaPrincipalJ2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
-        CartaPrincipalJ2Layout.setVerticalGroup(
-            CartaPrincipalJ2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 88, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout CartaPrincipalCentroLayout = new javax.swing.GroupLayout(CartaPrincipalCentro);
-        CartaPrincipalCentro.setLayout(CartaPrincipalCentroLayout);
-        CartaPrincipalCentroLayout.setHorizontalGroup(
-            CartaPrincipalCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
-        CartaPrincipalCentroLayout.setVerticalGroup(
-            CartaPrincipalCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 88, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout CartaPrincipalJ1Layout = new javax.swing.GroupLayout(CartaPrincipalJ1);
-        CartaPrincipalJ1.setLayout(CartaPrincipalJ1Layout);
-        CartaPrincipalJ1Layout.setHorizontalGroup(
-            CartaPrincipalJ1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
-        CartaPrincipalJ1Layout.setVerticalGroup(
-            CartaPrincipalJ1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 88, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout CartaSecJ2Layout = new javax.swing.GroupLayout(CartaSecJ2);
-        CartaSecJ2.setLayout(CartaSecJ2Layout);
-        CartaSecJ2Layout.setHorizontalGroup(
-            CartaSecJ2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
-        CartaSecJ2Layout.setVerticalGroup(
-            CartaSecJ2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 88, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout CartaSecCentroLayout = new javax.swing.GroupLayout(CartaSecCentro);
-        CartaSecCentro.setLayout(CartaSecCentroLayout);
-        CartaSecCentroLayout.setHorizontalGroup(
-            CartaSecCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
-        CartaSecCentroLayout.setVerticalGroup(
-            CartaSecCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 88, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout CartaSecJ1Layout = new javax.swing.GroupLayout(CartaSecJ1);
-        CartaSecJ1.setLayout(CartaSecJ1Layout);
-        CartaSecJ1Layout.setHorizontalGroup(
-            CartaSecJ1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
-        CartaSecJ1Layout.setVerticalGroup(
-            CartaSecJ1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 88, Short.MAX_VALUE)
-        );
 
         jLabel1.setText("Jugador 1:");
 
@@ -140,12 +88,50 @@ public class Guerra extends javax.swing.JFrame {
         LanzarJ1.setText("Lanzar Tarjeta");
 
         LanzarJ2.setText("Lanzar Tarjeta");
+        LanzarJ2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LanzarJ2ActionPerformed(evt);
+            }
+        });
+
+        MensajeFin.setText("MENSAJE DE VICTORIA");
+
+        CartaSecJ1.setToolTipText("");
+        CartaSecJ1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CartaSecJ1ActionPerformed(evt);
+            }
+        });
+
+        CartaSecJ2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CartaSecJ2ActionPerformed(evt);
+            }
+        });
+
+        CartaPrincipalJ2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CartaPrincipalJ2ActionPerformed(evt);
+            }
+        });
+
+        CartaCentroJ1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CartaCentroJ1ActionPerformed(evt);
+            }
+        });
+
+        CartaCentroJ2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CartaCentroJ2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -154,46 +140,46 @@ public class Guerra extends javax.swing.JFrame {
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ContadorRonda, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ContadorRonda, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(Inicio)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(CartaPrincipalJ1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(CartaSecJ1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(CartaPrincipalJ2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CartaPrincipalCentro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CartaSecCentro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CartaSecJ2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
+                                .addGap(8, 8, 8))))
+                    .addComponent(Inicio))
+                .addGap(10, 10, 10)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LanzarJ1)
-                    .addComponent(LanzarJ2))
-                .addGap(57, 57, 57))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(TextoCentro)
-                .addGap(156, 156, 156))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(CartaPrincipalJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(CartaSecJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(LanzarJ1))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(MensajeFin, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(CartaCentroJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(CartaCentroJ2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(38, 38, 38)))
+                    .addComponent(TextoCentro)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(CartaSecJ2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(CartaPrincipalJ2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(LanzarJ2)))
+                .addGap(72, 72, 72))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -201,30 +187,34 @@ public class Guerra extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(ContadorRonda))
-                        .addGap(157, 157, 157)
+                            .addComponent(ContadorRonda)))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(CartaSecJ2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(CartaPrincipalJ2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(LanzarJ2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(TextoCentro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(24, 24, 24)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
                         .addComponent(Inicio)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CartaPrincipalJ2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CartaSecJ2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(LanzarJ2))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CartaCentroJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CartaCentroJ2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(TextoCentro, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(LanzarJ1)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(MensajeFin)
+                                .addGap(12, 12, 12)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(CartaPrincipalCentro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(CartaSecCentro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(61, 61, 61)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(CartaPrincipalJ1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(CartaSecJ1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(LanzarJ1, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addContainerGap())
+                                    .addComponent(CartaPrincipalJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(CartaSecJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -259,8 +249,56 @@ public class Guerra extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void InicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InicioActionPerformed
-        // TODO add your handling code here:
+        // Inicio de Juego/Algoritmo para generar la baraja y repartirlo a los jugadores
+        int i = 2;
+        String color = "";
+        ArrayList<Carta> baraja = new ArrayList<>();
+        for(int x = 1; x <= 4; x++){
+            switch(x){
+                case 1 -> color = "Pica";
+                case 2 -> color = "Trebol";
+                case 3 -> color = "Corazon";
+                case 4 -> color = "Diamante";
+            }
+            for(i = 2; i <= 14; i++){
+                baraja.add(new Carta(i,color));
+            }
+        }
+        Collections.shuffle(baraja);
+        for(i = 1; i <= 26; i++){
+            j1.insertaInicio(baraja.remove(0));
+            j2.insertaInicio(baraja.remove(0));
+        }
+        Inicio.setEnabled(false);
+        LanzarJ1.setEnabled(true);
+        LanzarJ2.setEnabled(true);
+        CartaPrincipalJ1.setVisible(true);
+        CartaPrincipalJ2.setVisible(true);
     }//GEN-LAST:event_InicioActionPerformed
+
+    private void LanzarJ2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LanzarJ2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_LanzarJ2ActionPerformed
+
+    private void CartaSecJ1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CartaSecJ1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CartaSecJ1ActionPerformed
+
+    private void CartaSecJ2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CartaSecJ2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CartaSecJ2ActionPerformed
+
+    private void CartaPrincipalJ2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CartaPrincipalJ2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CartaPrincipalJ2ActionPerformed
+
+    private void CartaCentroJ1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CartaCentroJ1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CartaCentroJ1ActionPerformed
+
+    private void CartaCentroJ2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CartaCentroJ2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CartaCentroJ2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -293,22 +331,39 @@ public class Guerra extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Guerra().setVisible(true);
+                LanzarJ1.setEnabled(false);
+                LanzarJ2.setEnabled(false);
+                TextoCentro.setVisible(false);
+                MensajeFin.setVisible(false);
+                CartaCentroJ1.setEnabled(false);
+                CartaCentroJ1.setVisible(false);
+                CartaSecJ1.setEnabled(false);
+                CartaSecJ1.setVisible(false);
+                CartaPrincipalJ1.setEnabled(false);
+                CartaPrincipalJ1.setVisible(false);
+                CartaCentroJ2.setEnabled(false);
+                CartaCentroJ2.setVisible(false);
+                CartaSecJ2.setEnabled(false);
+                CartaSecJ2.setVisible(false);
+                CartaPrincipalJ2.setEnabled(false);
+                CartaPrincipalJ2.setVisible(false);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel CartaPrincipalCentro;
-    private javax.swing.JPanel CartaPrincipalJ1;
-    private javax.swing.JPanel CartaPrincipalJ2;
-    private javax.swing.JPanel CartaSecCentro;
-    private javax.swing.JPanel CartaSecJ1;
-    private javax.swing.JPanel CartaSecJ2;
+    private static javax.swing.JButton CartaCentroJ1;
+    private static javax.swing.JButton CartaCentroJ2;
+    private static javax.swing.JButton CartaPrincipalJ1;
+    private static javax.swing.JButton CartaPrincipalJ2;
+    private static javax.swing.JButton CartaSecJ1;
+    private static javax.swing.JButton CartaSecJ2;
     private javax.swing.JLabel ContadorRonda;
-    private javax.swing.JButton Inicio;
-    private javax.swing.JButton LanzarJ1;
-    private javax.swing.JButton LanzarJ2;
-    private javax.swing.JLabel TextoCentro;
+    private static javax.swing.JButton Inicio;
+    private static javax.swing.JButton LanzarJ1;
+    private static javax.swing.JButton LanzarJ2;
+    private static javax.swing.JLabel MensajeFin;
+    private static javax.swing.JLabel TextoCentro;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

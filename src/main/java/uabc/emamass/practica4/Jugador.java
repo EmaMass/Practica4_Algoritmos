@@ -92,6 +92,10 @@ public class Jugador<T> {
         }
     }
     
+    public boolean isEmpty(){
+        return inicio == null;
+    }
+    
     public String mostrarRecursivo() {
     return mostrarRecursivo(inicio);
     }

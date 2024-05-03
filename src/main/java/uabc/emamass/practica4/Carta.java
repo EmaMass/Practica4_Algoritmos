@@ -9,7 +9,7 @@ import java.util.Comparator;
  *
  * @author Emanuel Seiji Massuda Cuevas (poppe)
  */
-public class Carta {
+public class Carta implements Comparator<Carta> {
     int valor;
     String color;
     public static final Comparator<Carta> COMPARATOR = (Carta c1, Carta c2) -> c1.getValor() - c2.getValor();
@@ -47,6 +47,8 @@ public class Carta {
         return this.color;
     }
     
+    
+    
     @Override
     public String toString(){
         String mensaje = "";
@@ -74,5 +76,10 @@ public class Carta {
         }
         mensaje += color;
         return mensaje;
+    }
+
+    @Override
+    public int compare(Carta o1, Carta o2) {
+        return COMPARATOR.compare(o1, o2);   
     }
 }

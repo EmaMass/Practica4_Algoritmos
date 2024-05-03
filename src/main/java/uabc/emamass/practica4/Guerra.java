@@ -6,6 +6,8 @@ package uabc.emamass.practica4;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon.*;
 /**
  *
@@ -16,10 +18,14 @@ public class Guerra extends javax.swing.JFrame {
     Jugador j1;
     Jugador j2;
     int checkGuerra;
+    int contJ1Guerra;
+    int contJ2Guerra;
     int ronda;
     int MAX;
     Jugador centroJ1;
     Jugador centroJ2;
+    Jugador secJ1;
+    Jugador secJ2;
     /**
      * Creates new form Guerra
      */
@@ -28,10 +34,14 @@ public class Guerra extends javax.swing.JFrame {
         j1 = new Jugador();
         j2 = new Jugador();
         checkGuerra = 0;
+        contJ1Guerra = 0;
+        contJ2Guerra = 0;
         ronda = 0;
         MAX = 20; 
         centroJ1 = new Jugador();
         centroJ2 = new Jugador();
+        secJ1 = new Jugador();
+        secJ2 = new Jugador();
     }
 
     /**
@@ -270,6 +280,14 @@ public class Guerra extends javax.swing.JFrame {
         String color = "";
         j1 = new Jugador();
         j2 = new Jugador();
+        checkGuerra = 0;
+        contJ1Guerra = 0;
+        contJ2Guerra = 0;
+        ronda = 0;
+        centroJ1 = new Jugador();
+        centroJ2 = new Jugador();
+        secJ1 = new Jugador();
+        secJ2 = new Jugador();
         ArrayList<Carta> baraja = new ArrayList<>();
         for(int x = 1; x <= 4; x++){
             switch(x){
@@ -303,14 +321,29 @@ public class Guerra extends javax.swing.JFrame {
     private void LanzarJ2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LanzarJ2ActionPerformed
         // TODO add your handling code here:
         if(j1.isEmpty() != false && j2.isEmpty() != false){
-                MensajeFin.setEnabled(true);
-                LanzarJ1.setEnabled(false);
-                LanzarJ2.setEnabled(false);
-                Inicio.setEnabled(true);
-                if(j1.isEmpty() == true){
+                //Si J1 o J2 estan vacios, revisar si tiene cartas sec, sino, seguir
+                if(j1.isEmpty() == true && secJ1.isEmpty() == false){
+                  while(secJ1.isEmpty() != true){
+                      j1.insertaInicio(secJ1.eliminaInicio());
+                      CartaSecJ1.setIcon(null);
+                  }  
+                } else if(j2.isEmpty() == true && secJ2.isEmpty() == false){
+                  while(secJ2.isEmpty() != true){
+                      j2.insertaInicio(secJ2.eliminaInicio());
+                      CartaSecJ2.setIcon(null);
+                  }
+                } else {
+                    MensajeFin.setEnabled(true);
+                    LanzarJ1.setEnabled(false);
+                    LanzarJ2.setEnabled(false);
+                    Inicio.setEnabled(true);
+                    if(j1.isEmpty() == true){
                     MensajeFin.setText("El ganador es el jugador 2!");
-                } else{
+                    CartaPrincipalJ1.setIcon(null);
+                    } else{
                     MensajeFin.setText("El ganador es el jugador 1!");
+                    CartaPrincipalJ2.setIcon(null);
+                    }
                 }
             } else if(ronda > MAX){
                 MensajeFin.setEnabled(true);
@@ -318,9 +351,117 @@ public class Guerra extends javax.swing.JFrame {
                 LanzarJ2.setEnabled(false);
                 Inicio.setEnabled(true);
                 MensajeFin.setText("Empate, maxima cantidad de rondas");
+            } else if(checkGuerra == 0){
+                //Mandar Carta del J1 al CartaCentroJ1, desplegar carta, revisar si tiene carta igual el oponente para GUERRA!
+                //Caso 1 Mandar Carta a Centro, esperar al siguiente Jugador centroJ1 Y centroJ2
+                Carta cartaJ1 = (Carta) j2.eliminaInicio();
+                CartaCentroJ2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PlayingCards/Cards/"+cartaJ1+".png")));
+                if(centroJ1.isEmpty()){
+                    LanzarJ2.setEnabled(false);
+                    centroJ2.insertaInicio(cartaJ1);
+                } else {
+                    ronda++;
+                    ContadorRonda.setText(""+ronda);
+                //Caso 2 Mandar Carta a Centro, revisar y comparar cartas, ganador se lleva a su Secundario
+                    Carta cartaJ2 = (Carta) centroJ1.eliminaInicio();
+                    if(cartaJ1.compare(cartaJ2, cartaJ1) > 0){
+                        SimboloGanador.setText(">");
+                        SimboloGanador.setVisible(true);
+                        MensajeFin.setVisible(true);
+                        MensajeFin.setText("El ganador fue el jugador 1");
+                        secJ1.insertaInicio(cartaJ1);
+                        CartaSecJ1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PlayingCards/Cards/"+cartaJ1+".png")));
+                        secJ2.insertaInicio(cartaJ2);
+                        CartaCentroJ1.setIcon(null);
+                        CartaCentroJ2.setIcon(null);
+                        LanzarJ1.setEnabled(true);
+                        LanzarJ2.setEnabled(true);
+                    } else if(cartaJ1.compare(cartaJ1, cartaJ2) == 0){
+                        checkGuerra = 1;
+                        TextoCentro.setVisible(true);
+                    } else{
+                        SimboloGanador.setText("<");
+                        SimboloGanador.setVisible(true);
+                        MensajeFin.setVisible(true);
+                        MensajeFin.setText("El ganador fue el jugador 2");
+                        
+                        secJ2.insertaInicio(cartaJ2);
+                        CartaSecJ2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PlayingCards/Cards/"+cartaJ2+".png")));
+                        secJ2.insertaInicio(cartaJ1);
+                        CartaCentroJ1.setIcon(null);
+                        CartaCentroJ2.setIcon(null);
+                        LanzarJ1.setEnabled(true);
+                        LanzarJ2.setEnabled(true);
+                    }        
+                }
+                //Caso 3 Mandar Carta a Centro, revisar y comparar cartas, GUERRA, llenar condicion para guerra y forzar jugadores lanzar 4 cartas. (
             } else{
-                ronda++;
-                
+                //Case 3 contJ1 Y J2Guerra
+                Carta cartaJ1 = (Carta) j2.eliminaInicio();
+                contJ2Guerra++;
+                CartaCentroJ2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PlayingCards/Cards/J1.png")));
+                if(contJ2Guerra == 4){
+                    LanzarJ2.setEnabled(false);
+                    CartaCentroJ2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PlayingCards/Cards/"+cartaJ1+".png")));
+                }
+                if(contJ2Guerra == 4 && contJ1Guerra == 4){
+                    Carta cartaJ2 = (Carta) centroJ1.eliminaInicio();
+                    if(cartaJ1.compare(cartaJ2, cartaJ1) > 0){
+                        SimboloGanador.setText(">");
+                        SimboloGanador.setVisible(true);
+                        MensajeFin.setVisible(true);
+                        MensajeFin.setText("El ganador fue el jugador 1");
+                        
+                        centroJ1.insertaInicio(cartaJ1);
+                        while(centroJ1.isEmpty() != true){
+                            secJ1.insertaInicio(centroJ1.eliminaInicio());
+                        }
+                        centroJ2.insertaInicio(cartaJ2);
+                        while(centroJ2.isEmpty() != true){
+                            secJ1.insertaInicio(centroJ2.eliminaInicio());
+                        }
+                        cartaJ2 = (Carta) secJ1.eliminaInicio();
+                        CartaSecJ1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PlayingCards/Cards/"+cartaJ1+".png")));
+                        secJ1.insertaInicio(cartaJ2);
+                        TextoCentro.setVisible(false);
+                        CartaCentroJ1.setIcon(null);
+                        CartaCentroJ2.setIcon(null);
+                        LanzarJ1.setEnabled(true);
+                        LanzarJ2.setEnabled(true);
+                    } else if(cartaJ1.compare(cartaJ1, cartaJ2) == 0){
+                        checkGuerra = 1;
+                        contJ1Guerra = 0;
+                        contJ2Guerra = 0;
+                        centroJ1.insertaInicio(cartaJ1);
+                        centroJ2.insertaInicio(cartaJ2);
+                    } else{
+                        SimboloGanador.setText("<");
+                        SimboloGanador.setVisible(true);
+                        MensajeFin.setVisible(true);
+                        MensajeFin.setText("El ganador fue el jugador 2");
+                        
+                        centroJ1.insertaInicio(cartaJ1);
+                        centroJ2.insertaInicio(cartaJ2);
+                        while(centroJ2.isEmpty() != true){
+                            secJ2.insertaInicio(centroJ2.eliminaInicio());
+                        }
+                        while(centroJ1.isEmpty() != true){
+                            secJ2.insertaInicio(centroJ1.eliminaInicio());
+                        }
+                        cartaJ1 = (Carta) secJ2.eliminaInicio();
+                        CartaSecJ2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PlayingCards/Cards/"+cartaJ2+".png")));
+                        secJ2.insertaInicio(cartaJ1);
+                        TextoCentro.setVisible(false);
+                        CartaCentroJ1.setIcon(null);
+                        CartaCentroJ2.setIcon(null);
+                        LanzarJ1.setEnabled(true);
+                        LanzarJ2.setEnabled(true);
+                    }
+                    LanzarJ1.setEnabled(true);
+                    LanzarJ2.setEnabled(true);
+                } else{
+                    centroJ1.insertaInicio(cartaJ1);
+                }
             }
     }//GEN-LAST:event_LanzarJ2ActionPerformed
 
@@ -346,15 +487,30 @@ public class Guerra extends javax.swing.JFrame {
 
     private void LanzarJ1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LanzarJ1ActionPerformed
         // TODO add your handling code here:
-             /* if(j1.isEmpty() != false && j2.isEmpty() != false){
-                MensajeFin.setEnabled(true);
-                LanzarJ1.setEnabled(false);
-                LanzarJ2.setEnabled(false);
-                Inicio.setEnabled(true);
-                if(j1.isEmpty() == true){
+              if(j1.isEmpty() != false && j2.isEmpty() != false){
+                //Si J1 o J2 estan vacios, revisar si tiene cartas sec, sino, seguir
+                if(j1.isEmpty() == true && secJ1.isEmpty() == false){
+                  while(secJ1.isEmpty() != true){
+                      j1.insertaInicio(secJ1.eliminaInicio());
+                      CartaSecJ1.setIcon(null);
+                  }  
+                } else if(j2.isEmpty() == true && secJ2.isEmpty() == false){
+                  while(secJ2.isEmpty() != true){
+                      j2.insertaInicio(secJ2.eliminaInicio());
+                      CartaSecJ2.setIcon(null);
+                  }
+                } else {
+                    MensajeFin.setEnabled(true);
+                    LanzarJ1.setEnabled(false);
+                    LanzarJ2.setEnabled(false);
+                    Inicio.setEnabled(true);
+                    if(j1.isEmpty() == true){
                     MensajeFin.setText("El ganador es el jugador 2!");
-                } else{
+                    CartaPrincipalJ1.setIcon(null);
+                    } else{
                     MensajeFin.setText("El ganador es el jugador 1!");
+                    CartaPrincipalJ2.setIcon(null);
+                    }
                 }
             } else if(ronda > MAX){
                 MensajeFin.setEnabled(true);
@@ -362,15 +518,119 @@ public class Guerra extends javax.swing.JFrame {
                 LanzarJ2.setEnabled(false);
                 Inicio.setEnabled(true);
                 MensajeFin.setText("Empate, maxima cantidad de rondas");
-            } else{
-                ronda++;
+            } else if(checkGuerra == 0){
                 //Mandar Carta del J1 al CartaCentroJ1, desplegar carta, revisar si tiene carta igual el oponente para GUERRA!
-                //Caso 1 Mandar Carta a Centro, esperar al siguiente Jugador
-                
+                //Caso 1 Mandar Carta a Centro, esperar al siguiente Jugador centroJ1 Y centroJ2
+                Carta cartaJ1 = (Carta) j1.eliminaInicio();
+                CartaCentroJ1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PlayingCards/Cards/"+cartaJ1+".png")));
+                if(centroJ2.isEmpty()){
+                    LanzarJ1.setEnabled(false);
+                    centroJ1.insertaInicio(cartaJ1);
+                } else {
+                    ronda++;
+                    ContadorRonda.setText(""+ronda);
                 //Caso 2 Mandar Carta a Centro, revisar y comparar cartas, ganador se lleva a su Secundario
-                
+                    Carta cartaJ2 = (Carta) centroJ2.eliminaInicio();
+                    if(cartaJ1.compare(cartaJ1, cartaJ2) > 0){
+                        SimboloGanador.setText(">");
+                        SimboloGanador.setVisible(true);
+                        MensajeFin.setVisible(true);
+                        MensajeFin.setText("El ganador fue el jugador 1");
+                        
+                        secJ1.insertaInicio(cartaJ1);
+                        CartaSecJ1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PlayingCards/Cards/"+cartaJ2+".png")));
+                        secJ2.insertaInicio(cartaJ2);
+                        CartaCentroJ1.setIcon(null);
+                        CartaCentroJ2.setIcon(null);
+                        LanzarJ1.setEnabled(true);
+                        LanzarJ2.setEnabled(true);
+                    } else if(cartaJ1.compare(cartaJ1, cartaJ2) == 0){
+                        checkGuerra = 1;
+                        TextoCentro.setVisible(true);
+                    } else{
+                        SimboloGanador.setText("<");
+                        SimboloGanador.setVisible(true);
+                        MensajeFin.setVisible(true);
+                        MensajeFin.setText("El ganador fue el jugador 2");
+                        
+                        secJ2.insertaInicio(cartaJ2);
+                        CartaSecJ2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PlayingCards/Cards/"+cartaJ1+".png")));
+                        secJ2.insertaInicio(cartaJ1);
+                        CartaCentroJ1.setIcon(null);
+                        CartaCentroJ2.setIcon(null);
+                        LanzarJ1.setEnabled(true);
+                        LanzarJ2.setEnabled(true);
+                    }        
+                }
                 //Caso 3 Mandar Carta a Centro, revisar y comparar cartas, GUERRA, llenar condicion para guerra y forzar jugadores lanzar 4 cartas. (
-            } */
+            } else{
+                //Case 3 contJ1 Y J2Guerra
+                Carta cartaJ1 = (Carta) j1.eliminaInicio();
+                contJ1Guerra++;
+                CartaCentroJ1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PlayingCards/Cards/J1.png")));
+                if(contJ1Guerra == 4){
+                    LanzarJ1.setEnabled(false);
+                    CartaCentroJ1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PlayingCards/Cards/"+cartaJ1+".png")));
+                }
+                if(contJ2Guerra == 4 && contJ1Guerra == 4){
+                    Carta cartaJ2 = (Carta) centroJ2.eliminaInicio();
+                    if(cartaJ1.compare(cartaJ1, cartaJ2) > 0){
+                        SimboloGanador.setText(">");
+                        SimboloGanador.setVisible(true);
+                        MensajeFin.setVisible(true);
+                        MensajeFin.setText("El ganador fue el jugador 1");
+                        
+                        centroJ1.insertaInicio(cartaJ1);
+                        while(centroJ1.isEmpty() != true){
+                            secJ1.insertaInicio(centroJ1.eliminaInicio());
+                        }
+                        centroJ2.insertaInicio(cartaJ2);
+                        while(centroJ2.isEmpty() != true){
+                            secJ1.insertaInicio(centroJ2.eliminaInicio());
+                        }
+                        cartaJ2 = (Carta) secJ1.eliminaInicio();
+                        CartaSecJ1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PlayingCards/Cards/"+cartaJ2+".png")));
+                        secJ1.insertaInicio(cartaJ2);
+                        TextoCentro.setVisible(false);
+                        CartaCentroJ1.setIcon(null);
+                        CartaCentroJ2.setIcon(null);
+                        LanzarJ1.setEnabled(true);
+                        LanzarJ2.setEnabled(true);
+                    } else if(cartaJ1.compare(cartaJ1, cartaJ2) == 0){
+                        checkGuerra = 1;
+                        contJ1Guerra = 0;
+                        contJ2Guerra = 0;
+                        centroJ1.insertaInicio(cartaJ1);
+                        centroJ2.insertaInicio(cartaJ2);
+                    } else{
+                        SimboloGanador.setText("<");
+                        SimboloGanador.setVisible(true);
+                        MensajeFin.setVisible(true);
+                        MensajeFin.setText("El ganador fue el jugador 2");
+                        
+                        centroJ1.insertaInicio(cartaJ1);
+                        centroJ2.insertaInicio(cartaJ2);
+                        while(centroJ2.isEmpty() != true){
+                            secJ2.insertaInicio(centroJ2.eliminaInicio());
+                        }
+                        while(centroJ1.isEmpty() != true){
+                            secJ2.insertaInicio(centroJ1.eliminaInicio());
+                        }
+                        cartaJ1 = (Carta) secJ2.eliminaInicio();
+                        CartaSecJ2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PlayingCards/Cards/"+cartaJ1+".png")));
+                        secJ2.insertaInicio(cartaJ1);
+                        TextoCentro.setVisible(false);
+                        CartaCentroJ1.setIcon(null);
+                        CartaCentroJ2.setIcon(null);
+                        LanzarJ1.setEnabled(true);
+                        LanzarJ2.setEnabled(true);
+                    }
+                    LanzarJ1.setEnabled(true);
+                    LanzarJ2.setEnabled(true);
+                } else{
+                    centroJ1.insertaInicio(cartaJ1);
+                }
+            }
              /*
             CartaCentroJ1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PlayingCards/Cards/2Corazonprueba.png")));
             CartaCentroJ1.setVisible(true);
@@ -413,18 +673,6 @@ public class Guerra extends javax.swing.JFrame {
                 LanzarJ2.setEnabled(false);
                 TextoCentro.setVisible(false);
                 MensajeFin.setVisible(false);
-                CartaCentroJ1.setEnabled(false);
-                CartaCentroJ1.setVisible(false);
-                CartaSecJ1.setEnabled(false);
-                CartaSecJ1.setVisible(false);
-                CartaPrincipalJ1.setEnabled(false);
-                CartaPrincipalJ1.setVisible(false);
-                CartaCentroJ2.setEnabled(false);
-                CartaCentroJ2.setVisible(false);
-                CartaSecJ2.setEnabled(false);
-                CartaSecJ2.setVisible(false);
-                CartaPrincipalJ2.setEnabled(false);
-                CartaPrincipalJ2.setVisible(false);
                 SimboloGanador.setVisible(false);
             }
         });

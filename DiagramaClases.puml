@@ -1,0 +1,29 @@
+@startuml
+annotation java.lang.Override
+annotation java.lang.SuppressWarnings
+class java.util.ArrayList
+class java.util.Collections
+class java.util.List
+class java.util.Random
+class javax.swing.JFrame
+class uabc.emamass.practica4.Carta
+class uabc.emamass.practica4.Guerra
+class uabc.emamass.practica4.Jugador
+class uabc.emamass.practica4.Nodo
+class uabc.emamass.practica4.Practica4
+interface java.util.Comparator
+uabc.emamass.practica4.Carta ..> java.lang.Override
+uabc.emamass.practica4.Carta ..> java.util.Random
+uabc.emamass.practica4.Carta --|> java.util.Comparator
+uabc.emamass.practica4.Guerra ..> java.lang.SuppressWarnings
+uabc.emamass.practica4.Guerra ..> java.util.ArrayList
+uabc.emamass.practica4.Guerra ..> java.util.Collections
+uabc.emamass.practica4.Guerra --|> javax.swing.JFrame
+uabc.emamass.practica4.Jugador ..> java.util.ArrayList
+uabc.emamass.practica4.Jugador ..> java.util.Collections
+uabc.emamass.practica4.Jugador ..> java.util.List
+uabc.emamass.practica4.Jugador ..> java.util.Comparator
+uabc.emamass.practica4.Nodo ..> java.lang.Override
+uabc.emamass.practica4.Practica4 ..> java.util.ArrayList
+uabc.emamass.practica4.Practica4 ..> java.util.Collections
+@enduml

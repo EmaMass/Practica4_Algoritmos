@@ -292,8 +292,10 @@ public class Guerra extends javax.swing.JFrame {
         LanzarJ2.setEnabled(true);
         CartaPrincipalJ1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PlayingCards/Cards/J1.png")));
         CartaPrincipalJ1.setVisible(true);
+        CartaPrincipalJ1.setEnabled(true);
         CartaPrincipalJ2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PlayingCards/Cards/J2.png")));
         CartaPrincipalJ2.setVisible(true);
+        CartaPrincipalJ2.setEnabled(true);
         ronda = 0;
         //Carta Principal J1 y J2 metodo para poner foto de baraja. 
     }//GEN-LAST:event_InicioActionPerformed

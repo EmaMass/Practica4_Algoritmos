@@ -6,7 +6,7 @@ package uabc.emamass.practica4;
 
 import java.util.ArrayList;
 import java.util.Collections;
-
+import javax.swing.ImageIcon.*;
 /**
  *
  * @author Emanuel Seiji Massuda Cuevas (poppe)
@@ -61,6 +61,7 @@ public class Guerra extends javax.swing.JFrame {
         CartaPrincipalJ2 = new javax.swing.JButton();
         CartaCentroJ1 = new javax.swing.JButton();
         CartaCentroJ2 = new javax.swing.JButton();
+        SimboloGanador = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -136,6 +137,8 @@ public class Guerra extends javax.swing.JFrame {
             }
         });
 
+        SimboloGanador.setText(">");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -161,34 +164,34 @@ public class Guerra extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(CartaPrincipalJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(CartaCentroJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(SimboloGanador)
+                        .addGap(18, 18, 18)
+                        .addComponent(CartaCentroJ2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(CartaPrincipalJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(CartaSecJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(LanzarJ1))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(MensajeFin, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(CartaCentroJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(CartaCentroJ2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(38, 38, 38)))
                     .addComponent(TextoCentro)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(CartaSecJ2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11)
+                        .addComponent(CartaSecJ2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(CartaPrincipalJ2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(LanzarJ2)))
+                        .addComponent(LanzarJ2))
+                    .addComponent(MensajeFin, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(72, 72, 72))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -197,31 +200,36 @@ public class Guerra extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(ContadorRonda)))
-                    .addComponent(CartaSecJ2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CartaPrincipalJ2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LanzarJ2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(LanzarJ2)
+                    .addComponent(CartaSecJ2, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
+                    .addComponent(CartaPrincipalJ2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
                 .addComponent(TextoCentro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(24, 24, 24)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
+                        .addGap(63, 63, 63)
                         .addComponent(Inicio)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CartaCentroJ1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CartaCentroJ2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(39, 39, 39)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(CartaCentroJ1, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
+                                    .addComponent(CartaCentroJ2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(SimboloGanador)
+                                .addGap(53, 53, 53)))
+                        .addGap(8, 8, 8)
+                        .addComponent(MensajeFin)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(LanzarJ1)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(MensajeFin)
-                                .addGap(12, 12, 12)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(CartaPrincipalJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(CartaSecJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(CartaSecJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(CartaPrincipalJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(LanzarJ1))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -282,7 +290,9 @@ public class Guerra extends javax.swing.JFrame {
         Inicio.setEnabled(false);
         LanzarJ1.setEnabled(true);
         LanzarJ2.setEnabled(true);
+        CartaPrincipalJ1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PlayingCards/Cards/J1.png")));
         CartaPrincipalJ1.setVisible(true);
+        CartaPrincipalJ2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PlayingCards/Cards/J2.png")));
         CartaPrincipalJ2.setVisible(true);
         ronda = 0;
         //Carta Principal J1 y J2 metodo para poner foto de baraja. 
@@ -334,7 +344,7 @@ public class Guerra extends javax.swing.JFrame {
 
     private void LanzarJ1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LanzarJ1ActionPerformed
         // TODO add your handling code here:
-            if(j1.isEmpty() != false && j2.isEmpty() != false){
+             /* if(j1.isEmpty() != false && j2.isEmpty() != false){
                 MensajeFin.setEnabled(true);
                 LanzarJ1.setEnabled(false);
                 LanzarJ2.setEnabled(false);
@@ -353,7 +363,17 @@ public class Guerra extends javax.swing.JFrame {
             } else{
                 ronda++;
                 //Mandar Carta del J1 al CartaCentroJ1, desplegar carta, revisar si tiene carta igual el oponente para GUERRA!
-            }
+                //Caso 1 Mandar Carta a Centro, esperar al siguiente Jugador
+                
+                //Caso 2 Mandar Carta a Centro, revisar y comparar cartas, ganador se lleva a su Secundario
+                
+                //Caso 3 Mandar Carta a Centro, revisar y comparar cartas, GUERRA, llenar condicion para guerra y forzar jugadores lanzar 4 cartas. (
+            } */
+             /*
+            CartaCentroJ1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PlayingCards/Cards/2Corazonprueba.png")));
+            CartaCentroJ1.setVisible(true);
+            CartaCentroJ1.setEnabled(true);
+            */ //Ejemplo para fotos, necesita el enable para tener color
     }//GEN-LAST:event_LanzarJ1ActionPerformed
 
     /**
@@ -403,6 +423,7 @@ public class Guerra extends javax.swing.JFrame {
                 CartaSecJ2.setVisible(false);
                 CartaPrincipalJ2.setEnabled(false);
                 CartaPrincipalJ2.setVisible(false);
+                SimboloGanador.setVisible(false);
             }
         });
     }
@@ -419,6 +440,7 @@ public class Guerra extends javax.swing.JFrame {
     private static javax.swing.JButton LanzarJ1;
     private static javax.swing.JButton LanzarJ2;
     private static javax.swing.JLabel MensajeFin;
+    private static javax.swing.JLabel SimboloGanador;
     private static javax.swing.JLabel TextoCentro;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class Jugador<T> {
     private T dato = null;
     private Nodo inicio = null;
+    private int contador = 0;
     
     public Jugador(){
         this.dato = null;
@@ -30,6 +31,7 @@ public class Jugador<T> {
         Nodo n = new Nodo(dato);
         n.setSig(inicio);
         inicio = n; 
+        contador++;
     }
     
     public T eliminaInicio(){
@@ -40,6 +42,7 @@ public class Jugador<T> {
             dato = (T) inicio.getInfo();
             inicio = inicio.getSig();
         }
+        contador--;
         return dato;
     }
     
@@ -250,6 +253,10 @@ public class Jugador<T> {
                 }
             }
         }
+    }
+    
+    public int regresarSize(){
+        return contador; 
     }
 }
 

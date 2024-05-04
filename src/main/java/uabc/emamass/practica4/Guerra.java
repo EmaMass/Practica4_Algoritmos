@@ -37,7 +37,7 @@ public class Guerra extends javax.swing.JFrame {
         contJ1Guerra = 0;
         contJ2Guerra = 0;
         ronda = 0;
-        MAX = 20; 
+        MAX = 100; 
         centroJ1 = new Jugador();
         centroJ2 = new Jugador();
         secJ1 = new Jugador();
@@ -320,7 +320,7 @@ public class Guerra extends javax.swing.JFrame {
 
     private void LanzarJ2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LanzarJ2ActionPerformed
         // TODO add your handling code here:
-        if(j1.isEmpty() != false && j2.isEmpty() != false){
+        if(j1.isEmpty() != false || j2.isEmpty() != false){
                 //Si J1 o J2 estan vacios, revisar si tiene cartas sec, sino, seguir
                 if(j1.isEmpty() == true && secJ1.isEmpty() == false){
                   while(secJ1.isEmpty() != true){
@@ -364,6 +364,7 @@ public class Guerra extends javax.swing.JFrame {
                     ContadorRonda.setText(""+ronda);
                 //Caso 2 Mandar Carta a Centro, revisar y comparar cartas, ganador se lleva a su Secundario
                     Carta cartaJ2 = (Carta) centroJ1.eliminaInicio();
+                    //System.out.println("Carta 1: "+cartaJ2+"\nCarta 2: "+cartaJ1+"\nComparacion: "+cartaJ1.compare(cartaJ2, cartaJ1)+"Size: "+j1.regresarSize()+" J2: "+j2.regresarSize());
                     if(cartaJ1.compare(cartaJ2, cartaJ1) > 0){
                         SimboloGanador.setText(">");
                         SimboloGanador.setVisible(true);
@@ -379,6 +380,8 @@ public class Guerra extends javax.swing.JFrame {
                     } else if(cartaJ1.compare(cartaJ1, cartaJ2) == 0){
                         checkGuerra = 1;
                         TextoCentro.setVisible(true);
+                        LanzarJ1.setEnabled(true);
+                        LanzarJ2.setEnabled(true);
                     } else{
                         SimboloGanador.setText("<");
                         SimboloGanador.setVisible(true);
@@ -406,6 +409,7 @@ public class Guerra extends javax.swing.JFrame {
                 }
                 if(contJ2Guerra == 4 && contJ1Guerra == 4){
                     Carta cartaJ2 = (Carta) centroJ1.eliminaInicio();
+                    //System.out.println("Carta 1: "+cartaJ2+"\nCarta 2: "+cartaJ1+"\nComparacion: "+cartaJ1.compare(cartaJ2, cartaJ1)+"Size: "+j1.regresarSize()+" J2: "+j2.regresarSize());
                     if(cartaJ1.compare(cartaJ2, cartaJ1) > 0){
                         SimboloGanador.setText(">");
                         SimboloGanador.setVisible(true);
@@ -459,6 +463,9 @@ public class Guerra extends javax.swing.JFrame {
                     }
                     LanzarJ1.setEnabled(true);
                     LanzarJ2.setEnabled(true);
+                    checkGuerra = 0;
+                    contJ1Guerra = 0;
+                    contJ2Guerra = 0;
                 } else{
                     centroJ1.insertaInicio(cartaJ1);
                 }
@@ -487,7 +494,7 @@ public class Guerra extends javax.swing.JFrame {
 
     private void LanzarJ1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LanzarJ1ActionPerformed
         // TODO add your handling code here:
-              if(j1.isEmpty() != false && j2.isEmpty() != false){
+              if(j1.isEmpty() != false || j2.isEmpty() != false){
                 //Si J1 o J2 estan vacios, revisar si tiene cartas sec, sino, seguir
                 if(j1.isEmpty() == true && secJ1.isEmpty() == false){
                   while(secJ1.isEmpty() != true){
@@ -531,6 +538,7 @@ public class Guerra extends javax.swing.JFrame {
                     ContadorRonda.setText(""+ronda);
                 //Caso 2 Mandar Carta a Centro, revisar y comparar cartas, ganador se lleva a su Secundario
                     Carta cartaJ2 = (Carta) centroJ2.eliminaInicio();
+                    //System.out.println("Carta 1: "+cartaJ2+"\nCarta 2: "+cartaJ1+"\nComparacion: "+cartaJ1.compare(cartaJ2, cartaJ1)+"Size: "+j1.regresarSize()+" J2: "+j2.regresarSize());
                     if(cartaJ1.compare(cartaJ1, cartaJ2) > 0){
                         SimboloGanador.setText(">");
                         SimboloGanador.setVisible(true);
@@ -547,6 +555,8 @@ public class Guerra extends javax.swing.JFrame {
                     } else if(cartaJ1.compare(cartaJ1, cartaJ2) == 0){
                         checkGuerra = 1;
                         TextoCentro.setVisible(true);
+                        LanzarJ1.setEnabled(true);
+                        LanzarJ2.setEnabled(true);
                     } else{
                         SimboloGanador.setText("<");
                         SimboloGanador.setVisible(true);
@@ -574,6 +584,7 @@ public class Guerra extends javax.swing.JFrame {
                 }
                 if(contJ2Guerra == 4 && contJ1Guerra == 4){
                     Carta cartaJ2 = (Carta) centroJ2.eliminaInicio();
+                    //System.out.println("Carta 1: "+cartaJ2+"\nCarta 2: "+cartaJ1+"\nComparacion: "+cartaJ1.compare(cartaJ2, cartaJ1)+"Size: "+j1.regresarSize()+" J2: "+j2.regresarSize());
                     if(cartaJ1.compare(cartaJ1, cartaJ2) > 0){
                         SimboloGanador.setText(">");
                         SimboloGanador.setVisible(true);
@@ -627,6 +638,9 @@ public class Guerra extends javax.swing.JFrame {
                     }
                     LanzarJ1.setEnabled(true);
                     LanzarJ2.setEnabled(true);
+                    checkGuerra = 0;
+                    contJ1Guerra = 0;
+                    contJ2Guerra = 0;
                 } else{
                     centroJ1.insertaInicio(cartaJ1);
                 }
@@ -674,6 +688,9 @@ public class Guerra extends javax.swing.JFrame {
                 TextoCentro.setVisible(false);
                 MensajeFin.setVisible(false);
                 SimboloGanador.setVisible(false);
+                Carta test1 = new Carta(2,"Pica");
+                Carta test2 = new Carta(2, "Pica");
+                System.out.print(test1.compare(test1, test2));
             }
         });
     }

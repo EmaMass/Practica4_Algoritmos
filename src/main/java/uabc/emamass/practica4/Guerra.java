@@ -37,7 +37,7 @@ public class Guerra extends javax.swing.JFrame {
         contJ1Guerra = 0;
         contJ2Guerra = 0;
         ronda = 0;
-        MAX = 100; 
+        MAX = 50; 
         centroJ1 = new Jugador();
         centroJ2 = new Jugador();
         secJ1 = new Jugador();

@@ -6,11 +6,62 @@ class java.util.Collections
 class java.util.List
 class java.util.Random
 class javax.swing.JFrame
-class uabc.emamass.practica4.Carta
-class uabc.emamass.practica4.Guerra
-class uabc.emamass.practica4.Jugador
-class uabc.emamass.practica4.Nodo
-class uabc.emamass.practica4.Practica4
+class uabc.emamass.practica4.Carta{
+    int valor;
+    String color;
+    public static final Comparator<Carta> COMPARATOR = (Carta c1, Carta c2) -> c1.getValor() - c2.getValor();
+    +Carta(int valor, String color)
+    +void setValor(int valor)
+    +int getValor()
+    +void setColor(String color)
+    +String getColor()
+    +String toString()
+}
+class uabc.emamass.practica4.Guerra{
+    Jugador j1;
+    Jugador j2;
+    int checkGuerra;
+    int contJ1Guerra;
+    int contJ2Guerra;
+    int ronda;
+    int MAX;
+    Jugador centroJ1;
+    Jugador centroJ2;
+    Jugador secJ1;
+    Jugador secJ2;
+    +Guerra()
+    -void InicioActionPerformed(java.awt.event.ActionEvent evt)
+    -void LanzarJ2ActionPerformed(java.awt.event.ActionEvent evt)
+    -void LanzarJ1ActionPerformed(java.awt.event.ActionEvent evt)
+    +void run()
+}
+class uabc.emamass.practica4.Jugador{
+    -T dato = null;
+    -Nodo inicio = null;
+    -int contador = 0;
+    +Jugador()
+    +Jugador(T dato)
+    +void insertaInicio(T dato)
+    +T eliminaInicio()
+    +void insertaFinal(T dato)
+    +T eliminaFinal()
+    +boolean isEmpty()
+    +int regresarSize()
+}
+class uabc.emamass.practica4.Nodo{
+    -T info;
+    -Nodo sig;
+    -Nodo ant;
+    +Nodo(T info)
+    +Nodo()
+    +void setInfo(T info)
+    +T getInfo()
+    +void setSig(Nodo sig)
+    +Nodo getSig()
+    +Nodo getAnt()
+    +void setAnt(Nodo ant)
+    +String toString()
+}
 interface java.util.Comparator
 uabc.emamass.practica4.Carta ..> java.lang.Override
 uabc.emamass.practica4.Carta ..> java.util.Random
@@ -24,6 +75,4 @@ uabc.emamass.practica4.Jugador ..> java.util.Collections
 uabc.emamass.practica4.Jugador ..> java.util.List
 uabc.emamass.practica4.Jugador ..> java.util.Comparator
 uabc.emamass.practica4.Nodo ..> java.lang.Override
-uabc.emamass.practica4.Practica4 ..> java.util.ArrayList
-uabc.emamass.practica4.Practica4 ..> java.util.Collections
 @enduml

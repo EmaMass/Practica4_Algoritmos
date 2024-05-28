@@ -14,6 +14,7 @@ import javax.swing.ImageIcon.*;
  * @author Emanuel Seiji Massuda Cuevas (poppe)
  */
 public class Guerra extends javax.swing.JFrame {
+    //Agregar botones que muestra todas las cartas del mazo (todas las cartas de la mano de los jugadores y de los ganadas) Y crear un nuevo boton que hace la comparacion de quien gano
     
     Jugador j1;
     Jugador j2;
@@ -37,7 +38,7 @@ public class Guerra extends javax.swing.JFrame {
         contJ1Guerra = 0;
         contJ2Guerra = 0;
         ronda = 0;
-        MAX = 50; 
+        MAX = 20; 
         centroJ1 = new Jugador();
         centroJ2 = new Jugador();
         secJ1 = new Jugador();
@@ -72,6 +73,11 @@ public class Guerra extends javax.swing.JFrame {
         CartaCentroJ1 = new javax.swing.JButton();
         CartaCentroJ2 = new javax.swing.JButton();
         SimboloGanador = new javax.swing.JLabel();
+        Comparar = new javax.swing.JButton();
+        VerTarjetasJ1Sec = new javax.swing.JButton();
+        VerTarjetasJ2 = new javax.swing.JButton();
+        VerTarjetasJ1 = new javax.swing.JButton();
+        VerTarjetasJ2Sec = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -149,52 +155,103 @@ public class Guerra extends javax.swing.JFrame {
 
         SimboloGanador.setText(">");
 
+        Comparar.setText("Comparar");
+        Comparar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CompararActionPerformed(evt);
+            }
+        });
+
+        VerTarjetasJ1Sec.setText("Ver Tarjetas");
+        VerTarjetasJ1Sec.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VerTarjetasJ1SecActionPerformed(evt);
+            }
+        });
+
+        VerTarjetasJ2.setText("Ver Tarjetas");
+        VerTarjetasJ2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VerTarjetasJ2ActionPerformed(evt);
+            }
+        });
+
+        VerTarjetasJ1.setText("Ver Tarjetas");
+        VerTarjetasJ1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VerTarjetasJ1ActionPerformed(evt);
+            }
+        });
+
+        VerTarjetasJ2Sec.setText("Ver Tarjetas");
+        VerTarjetasJ2Sec.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VerTarjetasJ2SecActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ContadorRonda, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2))
-                                .addGap(8, 8, 8))))
-                    .addComponent(Inicio))
-                .addGap(10, 10, 10)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel2))
+                                        .addGap(8, 8, 8))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(ContadorRonda, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(10, 10, 10)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(TextoCentro)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(CartaCentroJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(SimboloGanador)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(CartaCentroJ2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(Comparar))))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(Inicio)
+                                .addGap(43, 43, 43)
+                                .addComponent(MensajeFin, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(CartaCentroJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(SimboloGanador)
-                        .addGap(18, 18, 18)
-                        .addComponent(CartaCentroJ2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
+                        .addGap(71, 71, 71)
+                        .addComponent(VerTarjetasJ1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(CartaPrincipalJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(CartaSecJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(LanzarJ1))
-                    .addComponent(TextoCentro)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LanzarJ1)
+                            .addComponent(VerTarjetasJ1Sec)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
+                        .addGap(73, 73, 73)
+                        .addComponent(VerTarjetasJ2Sec)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(CartaSecJ2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(CartaPrincipalJ2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(LanzarJ2))
-                    .addComponent(MensajeFin, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LanzarJ2)
+                            .addComponent(VerTarjetasJ2))))
                 .addGap(72, 72, 72))
         );
         jPanel2Layout.setVerticalGroup(
@@ -209,8 +266,13 @@ public class Guerra extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(ContadorRonda)))
-                    .addComponent(LanzarJ2)
+                            .addComponent(ContadorRonda))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(VerTarjetasJ2Sec))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(LanzarJ2)
+                        .addGap(18, 18, 18)
+                        .addComponent(VerTarjetasJ2))
                     .addComponent(CartaSecJ2, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
                     .addComponent(CartaPrincipalJ2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(27, 27, 27)
@@ -220,26 +282,34 @@ public class Guerra extends javax.swing.JFrame {
                         .addGap(63, 63, 63)
                         .addComponent(Inicio)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(VerTarjetasJ1)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel1))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(39, 39, 39)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(CartaCentroJ1, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
-                                    .addComponent(CartaCentroJ2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(18, 18, 18))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(SimboloGanador)
-                                .addGap(53, 53, 53)))
-                        .addGap(8, 8, 8)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(CartaCentroJ1, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
+                                        .addComponent(CartaCentroJ2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(SimboloGanador)
+                                        .addGap(53, 53, 53)))
+                                .addGap(8, 8, 8))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(Comparar)
+                                .addGap(41, 41, 41)))
                         .addComponent(MensajeFin)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(CartaSecJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(CartaPrincipalJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(LanzarJ1))))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(VerTarjetasJ1Sec)
+                                .addGap(18, 18, 18)
+                                .addComponent(LanzarJ1)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -314,6 +384,10 @@ public class Guerra extends javax.swing.JFrame {
         CartaPrincipalJ2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PlayingCards/Cards/J2.png")));
         CartaPrincipalJ2.setVisible(true);
         CartaPrincipalJ2.setEnabled(true);
+        VerTarjetasJ1.setEnabled(true);
+        VerTarjetasJ2Sec.setEnabled(true);
+        VerTarjetasJ1Sec.setEnabled(true);
+        VerTarjetasJ2.setEnabled(true);
         ronda = 0;
         //Carta Principal J1 y J2 metodo para poner foto de baraja. 
     }//GEN-LAST:event_InicioActionPerformed
@@ -336,6 +410,10 @@ public class Guerra extends javax.swing.JFrame {
                     MensajeFin.setEnabled(true);
                     LanzarJ1.setEnabled(false);
                     LanzarJ2.setEnabled(false);
+                    VerTarjetasJ1.setEnabled(false);
+                    VerTarjetasJ2Sec.setEnabled(false);
+                    VerTarjetasJ1Sec.setEnabled(false);
+                    VerTarjetasJ2.setEnabled(false);
                     Inicio.setEnabled(true);
                     if(j1.isEmpty() == true){
                     MensajeFin.setText("El ganador es el jugador 2!");
@@ -345,7 +423,7 @@ public class Guerra extends javax.swing.JFrame {
                     CartaPrincipalJ2.setIcon(null);
                     }
                 }
-            } else if(ronda > MAX){
+            } else if(ronda >= MAX){
                 MensajeFin.setEnabled(true);
                 LanzarJ1.setEnabled(false);
                 LanzarJ2.setEnabled(false);
@@ -359,43 +437,17 @@ public class Guerra extends javax.swing.JFrame {
                 if(centroJ1.isEmpty()){
                     LanzarJ2.setEnabled(false);
                     centroJ2.insertaInicio(cartaJ1);
-                } else {
-                    ronda++;
-                    ContadorRonda.setText(""+ronda);
-                //Caso 2 Mandar Carta a Centro, revisar y comparar cartas, ganador se lleva a su Secundario
+                } else{
                     Carta cartaJ2 = (Carta) centroJ1.eliminaInicio();
-                    //System.out.println("Carta 1: "+cartaJ2+"\nCarta 2: "+cartaJ1+"\nComparacion: "+cartaJ1.compare(cartaJ2, cartaJ1)+"Size: "+j1.regresarSize()+" J2: "+j2.regresarSize());
-                    if(cartaJ1.compare(cartaJ2, cartaJ1) > 0){
-                        SimboloGanador.setText(">");
-                        SimboloGanador.setVisible(true);
-                        MensajeFin.setVisible(true);
-                        MensajeFin.setText("El ganador fue el jugador 1");
-                        secJ1.insertaInicio(cartaJ1);
-                        CartaSecJ1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PlayingCards/Cards/"+cartaJ1+".png")));
-                        secJ2.insertaInicio(cartaJ2);
-                        CartaCentroJ1.setIcon(null);
-                        CartaCentroJ2.setIcon(null);
-                        LanzarJ1.setEnabled(true);
-                        LanzarJ2.setEnabled(true);
-                    } else if(cartaJ1.compare(cartaJ1, cartaJ2) == 0){
+                    LanzarJ2.setEnabled(false);
+                    if(cartaJ1.compare(cartaJ1, cartaJ2) == 0){
                         checkGuerra = 1;
                         TextoCentro.setVisible(true);
                         LanzarJ1.setEnabled(true);
                         LanzarJ2.setEnabled(true);
-                    } else{
-                        SimboloGanador.setText("<");
-                        SimboloGanador.setVisible(true);
-                        MensajeFin.setVisible(true);
-                        MensajeFin.setText("El ganador fue el jugador 2");
-                        
-                        secJ2.insertaInicio(cartaJ2);
-                        CartaSecJ2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PlayingCards/Cards/"+cartaJ2+".png")));
-                        secJ2.insertaInicio(cartaJ1);
-                        CartaCentroJ1.setIcon(null);
-                        CartaCentroJ2.setIcon(null);
-                        LanzarJ1.setEnabled(true);
-                        LanzarJ2.setEnabled(true);
-                    }        
+                    }
+                    centroJ2.insertaInicio(cartaJ1);
+                    centroJ1.insertaInicio(cartaJ2);
                 }
                 //Caso 3 Mandar Carta a Centro, revisar y comparar cartas, GUERRA, llenar condicion para guerra y forzar jugadores lanzar 4 cartas. (
             } else{
@@ -406,68 +458,9 @@ public class Guerra extends javax.swing.JFrame {
                 if(contJ2Guerra == 4){
                     LanzarJ2.setEnabled(false);
                     CartaCentroJ2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PlayingCards/Cards/"+cartaJ1+".png")));
-                }
-                if(contJ2Guerra == 4 && contJ1Guerra == 4){
-                    Carta cartaJ2 = (Carta) centroJ1.eliminaInicio();
-                    //System.out.println("Carta 1: "+cartaJ2+"\nCarta 2: "+cartaJ1+"\nComparacion: "+cartaJ1.compare(cartaJ2, cartaJ1)+"Size: "+j1.regresarSize()+" J2: "+j2.regresarSize());
-                    if(cartaJ1.compare(cartaJ2, cartaJ1) > 0){
-                        SimboloGanador.setText(">");
-                        SimboloGanador.setVisible(true);
-                        MensajeFin.setVisible(true);
-                        MensajeFin.setText("El ganador fue el jugador 1");
-                        
-                        centroJ1.insertaInicio(cartaJ1);
-                        while(centroJ1.isEmpty() != true){
-                            secJ1.insertaInicio(centroJ1.eliminaInicio());
-                        }
-                        centroJ2.insertaInicio(cartaJ2);
-                        while(centroJ2.isEmpty() != true){
-                            secJ1.insertaInicio(centroJ2.eliminaInicio());
-                        }
-                        cartaJ2 = (Carta) secJ1.eliminaInicio();
-                        CartaSecJ1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PlayingCards/Cards/"+cartaJ1+".png")));
-                        secJ1.insertaInicio(cartaJ2);
-                        TextoCentro.setVisible(false);
-                        CartaCentroJ1.setIcon(null);
-                        CartaCentroJ2.setIcon(null);
-                        LanzarJ1.setEnabled(true);
-                        LanzarJ2.setEnabled(true);
-                    } else if(cartaJ1.compare(cartaJ1, cartaJ2) == 0){
-                        checkGuerra = 1;
-                        contJ1Guerra = 0;
-                        contJ2Guerra = 0;
-                        centroJ1.insertaInicio(cartaJ1);
-                        centroJ2.insertaInicio(cartaJ2);
-                    } else{
-                        SimboloGanador.setText("<");
-                        SimboloGanador.setVisible(true);
-                        MensajeFin.setVisible(true);
-                        MensajeFin.setText("El ganador fue el jugador 2");
-                        
-                        centroJ1.insertaInicio(cartaJ1);
-                        centroJ2.insertaInicio(cartaJ2);
-                        while(centroJ2.isEmpty() != true){
-                            secJ2.insertaInicio(centroJ2.eliminaInicio());
-                        }
-                        while(centroJ1.isEmpty() != true){
-                            secJ2.insertaInicio(centroJ1.eliminaInicio());
-                        }
-                        cartaJ1 = (Carta) secJ2.eliminaInicio();
-                        CartaSecJ2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PlayingCards/Cards/"+cartaJ2+".png")));
-                        secJ2.insertaInicio(cartaJ1);
-                        TextoCentro.setVisible(false);
-                        CartaCentroJ1.setIcon(null);
-                        CartaCentroJ2.setIcon(null);
-                        LanzarJ1.setEnabled(true);
-                        LanzarJ2.setEnabled(true);
-                    }
-                    LanzarJ1.setEnabled(true);
-                    LanzarJ2.setEnabled(true);
-                    checkGuerra = 0;
-                    contJ1Guerra = 0;
-                    contJ2Guerra = 0;
+                    centroJ2.insertaInicio(cartaJ1);
                 } else{
-                    centroJ1.insertaInicio(cartaJ1);
+                    centroJ2.insertaInicio(cartaJ1);
                 }
             }
     }//GEN-LAST:event_LanzarJ2ActionPerformed
@@ -510,6 +503,10 @@ public class Guerra extends javax.swing.JFrame {
                     MensajeFin.setEnabled(true);
                     LanzarJ1.setEnabled(false);
                     LanzarJ2.setEnabled(false);
+                    VerTarjetasJ1.setEnabled(false);
+                    VerTarjetasJ2Sec.setEnabled(false);
+                    VerTarjetasJ1Sec.setEnabled(false);
+                    VerTarjetasJ2.setEnabled(false);
                     Inicio.setEnabled(true);
                     if(j1.isEmpty() == true){
                     MensajeFin.setText("El ganador es el jugador 2!");
@@ -519,7 +516,7 @@ public class Guerra extends javax.swing.JFrame {
                     CartaPrincipalJ2.setIcon(null);
                     }
                 }
-            } else if(ronda > MAX){
+            } else if(ronda >= MAX){
                 MensajeFin.setEnabled(true);
                 LanzarJ1.setEnabled(false);
                 LanzarJ2.setEnabled(false);
@@ -534,43 +531,16 @@ public class Guerra extends javax.swing.JFrame {
                     LanzarJ1.setEnabled(false);
                     centroJ1.insertaInicio(cartaJ1);
                 } else {
-                    ronda++;
-                    ContadorRonda.setText(""+ronda);
-                //Caso 2 Mandar Carta a Centro, revisar y comparar cartas, ganador se lleva a su Secundario
                     Carta cartaJ2 = (Carta) centroJ2.eliminaInicio();
-                    //System.out.println("Carta 1: "+cartaJ2+"\nCarta 2: "+cartaJ1+"\nComparacion: "+cartaJ1.compare(cartaJ2, cartaJ1)+"Size: "+j1.regresarSize()+" J2: "+j2.regresarSize());
-                    if(cartaJ1.compare(cartaJ1, cartaJ2) > 0){
-                        SimboloGanador.setText(">");
-                        SimboloGanador.setVisible(true);
-                        MensajeFin.setVisible(true);
-                        MensajeFin.setText("El ganador fue el jugador 1");
-                        
-                        secJ1.insertaInicio(cartaJ1);
-                        CartaSecJ1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PlayingCards/Cards/"+cartaJ2+".png")));
-                        secJ2.insertaInicio(cartaJ2);
-                        CartaCentroJ1.setIcon(null);
-                        CartaCentroJ2.setIcon(null);
-                        LanzarJ1.setEnabled(true);
-                        LanzarJ2.setEnabled(true);
-                    } else if(cartaJ1.compare(cartaJ1, cartaJ2) == 0){
+                    LanzarJ1.setEnabled(false);
+                    if(cartaJ1.compare(cartaJ1, cartaJ2) == 0){
                         checkGuerra = 1;
                         TextoCentro.setVisible(true);
                         LanzarJ1.setEnabled(true);
                         LanzarJ2.setEnabled(true);
-                    } else{
-                        SimboloGanador.setText("<");
-                        SimboloGanador.setVisible(true);
-                        MensajeFin.setVisible(true);
-                        MensajeFin.setText("El ganador fue el jugador 2");
-                        
-                        secJ2.insertaInicio(cartaJ2);
-                        CartaSecJ2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PlayingCards/Cards/"+cartaJ1+".png")));
-                        secJ2.insertaInicio(cartaJ1);
-                        CartaCentroJ1.setIcon(null);
-                        CartaCentroJ2.setIcon(null);
-                        LanzarJ1.setEnabled(true);
-                        LanzarJ2.setEnabled(true);
-                    }        
+                    }
+                        centroJ1.insertaInicio(cartaJ1);
+                        centroJ2.insertaInicio(cartaJ2);
                 }
                 //Caso 3 Mandar Carta a Centro, revisar y comparar cartas, GUERRA, llenar condicion para guerra y forzar jugadores lanzar 4 cartas. (
             } else{
@@ -581,11 +551,46 @@ public class Guerra extends javax.swing.JFrame {
                 if(contJ1Guerra == 4){
                     LanzarJ1.setEnabled(false);
                     CartaCentroJ1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PlayingCards/Cards/"+cartaJ1+".png")));
+                    centroJ1.insertaInicio(cartaJ1);
+                } else{
+                    centroJ1.insertaInicio(cartaJ1);
                 }
-                if(contJ2Guerra == 4 && contJ1Guerra == 4){
-                    Carta cartaJ2 = (Carta) centroJ2.eliminaInicio();
-                    //System.out.println("Carta 1: "+cartaJ2+"\nCarta 2: "+cartaJ1+"\nComparacion: "+cartaJ1.compare(cartaJ2, cartaJ1)+"Size: "+j1.regresarSize()+" J2: "+j2.regresarSize());
-                    if(cartaJ1.compare(cartaJ1, cartaJ2) > 0){
+            }
+             /*
+            CartaCentroJ1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PlayingCards/Cards/2Corazonprueba.png")));
+            CartaCentroJ1.setVisible(true);
+            CartaCentroJ1.setEnabled(true);
+            */ //Ejemplo para fotos, necesita el enable para tener color
+    }//GEN-LAST:event_LanzarJ1ActionPerformed
+
+    private void VerTarjetasJ2SecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerTarjetasJ2SecActionPerformed
+        // TODO add your handling code here:
+        System.out.println(secJ2.mostrarRecursivo());
+    }//GEN-LAST:event_VerTarjetasJ2SecActionPerformed
+
+    private void VerTarjetasJ2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerTarjetasJ2ActionPerformed
+        // TODO add your handling code here:
+        System.out.println(j2.mostrarRecursivo());
+    }//GEN-LAST:event_VerTarjetasJ2ActionPerformed
+
+    private void VerTarjetasJ1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerTarjetasJ1ActionPerformed
+        // TODO add your handling code here:
+        System.out.println(j1.mostrarRecursivo());
+    }//GEN-LAST:event_VerTarjetasJ1ActionPerformed
+
+    private void VerTarjetasJ1SecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerTarjetasJ1SecActionPerformed
+        // TODO add your handling code here:
+        System.out.println(secJ1.mostrarRecursivo());
+    }//GEN-LAST:event_VerTarjetasJ1SecActionPerformed
+
+    private void CompararActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CompararActionPerformed
+        // TODO add your handling code here:
+        if(checkGuerra == 1){
+            //Caso Guerra
+            if(contJ1Guerra == 4 && contJ2Guerra == 4){
+                Carta cartaJ1 = (Carta) centroJ1.eliminaInicio();
+                Carta cartaJ2 = (Carta) centroJ2.eliminaInicio();
+                if(cartaJ1.compare(cartaJ1, cartaJ2) > 0){
                         SimboloGanador.setText(">");
                         SimboloGanador.setVisible(true);
                         MensajeFin.setVisible(true);
@@ -607,6 +612,9 @@ public class Guerra extends javax.swing.JFrame {
                         CartaCentroJ2.setIcon(null);
                         LanzarJ1.setEnabled(true);
                         LanzarJ2.setEnabled(true);
+                        checkGuerra = 0;
+                        contJ1Guerra = 0;
+                        contJ2Guerra = 0;
                     } else if(cartaJ1.compare(cartaJ1, cartaJ2) == 0){
                         checkGuerra = 1;
                         contJ1Guerra = 0;
@@ -635,22 +643,53 @@ public class Guerra extends javax.swing.JFrame {
                         CartaCentroJ2.setIcon(null);
                         LanzarJ1.setEnabled(true);
                         LanzarJ2.setEnabled(true);
+                        checkGuerra = 0;
+                        contJ1Guerra = 0;
+                        contJ2Guerra = 0;
                     }
-                    LanzarJ1.setEnabled(true);
-                    LanzarJ2.setEnabled(true);
-                    checkGuerra = 0;
-                    contJ1Guerra = 0;
-                    contJ2Guerra = 0;
-                } else{
-                    centroJ1.insertaInicio(cartaJ1);
-                }
             }
-             /*
-            CartaCentroJ1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PlayingCards/Cards/2Corazonprueba.png")));
-            CartaCentroJ1.setVisible(true);
-            CartaCentroJ1.setEnabled(true);
-            */ //Ejemplo para fotos, necesita el enable para tener color
-    }//GEN-LAST:event_LanzarJ1ActionPerformed
+        } else if(centroJ1.isEmpty() == false && centroJ2.isEmpty() == false){
+            //Caso Normal
+                    Carta cartaJ1 = (Carta) centroJ1.eliminaInicio();
+                    ronda++;
+                    ContadorRonda.setText(""+ronda);
+                //Caso 2 Mandar Carta a Centro, revisar y comparar cartas, ganador se lleva a su Secundario
+                    Carta cartaJ2 = (Carta) centroJ2.eliminaInicio();
+                    //System.out.println("Carta 1: "+cartaJ2+"\nCarta 2: "+cartaJ1+"\nComparacion: "+cartaJ1.compare(cartaJ2, cartaJ1)+"Size: "+j1.regresarSize()+" J2: "+j2.regresarSize());
+                    if(cartaJ1.compare(cartaJ1, cartaJ2) > 0){
+                        SimboloGanador.setText(">");
+                        SimboloGanador.setVisible(true);
+                        MensajeFin.setVisible(true);
+                        MensajeFin.setText("El ganador fue el jugador 1");
+                        
+                        secJ1.insertaInicio(cartaJ1);
+                        CartaSecJ1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PlayingCards/Cards/"+cartaJ2+".png")));
+                        secJ1.insertaInicio(cartaJ2);
+                        CartaCentroJ1.setIcon(null);
+                        CartaCentroJ2.setIcon(null);
+                        LanzarJ1.setEnabled(true);
+                        LanzarJ2.setEnabled(true);
+                    } else if(cartaJ1.compare(cartaJ1, cartaJ2) == 0){
+                        checkGuerra = 1;
+                        TextoCentro.setVisible(true);
+                        LanzarJ1.setEnabled(true);
+                        LanzarJ2.setEnabled(true);
+                    } else{
+                        SimboloGanador.setText("<");
+                        SimboloGanador.setVisible(true);
+                        MensajeFin.setVisible(true);
+                        MensajeFin.setText("El ganador fue el jugador 2");
+                        
+                        secJ2.insertaInicio(cartaJ2);
+                        CartaSecJ2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PlayingCards/Cards/"+cartaJ1+".png")));
+                        secJ2.insertaInicio(cartaJ1);
+                        CartaCentroJ1.setIcon(null);
+                        CartaCentroJ2.setIcon(null);
+                        LanzarJ1.setEnabled(true);
+                        LanzarJ2.setEnabled(true);
+                    }
+        }
+    }//GEN-LAST:event_CompararActionPerformed
 
     /**
      * @param args the command line arguments
@@ -685,6 +724,10 @@ public class Guerra extends javax.swing.JFrame {
                 new Guerra().setVisible(true);
                 LanzarJ1.setEnabled(false);
                 LanzarJ2.setEnabled(false);
+                VerTarjetasJ1.setEnabled(false);
+                VerTarjetasJ2Sec.setEnabled(false);
+                VerTarjetasJ1Sec.setEnabled(false);
+                VerTarjetasJ2.setEnabled(false);
                 TextoCentro.setVisible(false);
                 MensajeFin.setVisible(false);
                 SimboloGanador.setVisible(false);
@@ -702,6 +745,7 @@ public class Guerra extends javax.swing.JFrame {
     private static javax.swing.JButton CartaPrincipalJ2;
     private static javax.swing.JButton CartaSecJ1;
     private static javax.swing.JButton CartaSecJ2;
+    private static javax.swing.JButton Comparar;
     private javax.swing.JLabel ContadorRonda;
     private static javax.swing.JButton Inicio;
     private static javax.swing.JButton LanzarJ1;
@@ -709,6 +753,10 @@ public class Guerra extends javax.swing.JFrame {
     private static javax.swing.JLabel MensajeFin;
     private static javax.swing.JLabel SimboloGanador;
     private static javax.swing.JLabel TextoCentro;
+    private static javax.swing.JButton VerTarjetasJ1;
+    private static javax.swing.JButton VerTarjetasJ1Sec;
+    private static javax.swing.JButton VerTarjetasJ2;
+    private static javax.swing.JButton VerTarjetasJ2Sec;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
